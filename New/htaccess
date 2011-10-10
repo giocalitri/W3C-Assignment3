@@ -1,24 +1,4 @@
-
-# Use UTF-8 encoding for anything served text/plain or text/html
-AddDefaultCharset utf-8
-
-# Force UTF-8 for a number of file formats
-AddCharset utf-8 .html .css .js .xml .json .rss .php
-
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE application/x-javascript
-    AddOutputFilterByType DEFLATE text/css text/html text/plain text/xml
-    DeflateCompressionLevel 9
-</IfModule>
-
-# Vary accept encoding
-<IfModule mod_headers.c>
-  <FilesMatch "\.(js|css|xml|gz)$">
-    Header append Vary Accept-Encoding
-  </FilesMatch>
-</IfModule>
- 
-# BEGIN Expire headers
+# Expire headers
 <ifModule mod_expires.c>
   ExpiresActive On
   ExpiresDefault "access plus 5 seconds"
@@ -35,9 +15,8 @@ AddCharset utf-8 .html .css .js .xml .json .rss .php
   ExpiresByType text/php "access plus 600 seconds"
   ExpiresByType application/xhtml+xml "access plus 600 seconds"
 </ifModule>
-# END Expire headers
  
-# BEGIN Cache-Control Headers
+# Cache-Control Headers
 <ifModule mod_headers.c>
   <filesMatch "\.(ico|jpe?g|png|gif|swf)$">
     Header set Cache-Control "public"
